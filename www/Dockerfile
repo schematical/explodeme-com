@@ -3,7 +3,7 @@ FROM node:22-alpine
 WORKDIR /app
 
 
-COPY ./public /app/public
+COPY ./src/public /app/public
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
