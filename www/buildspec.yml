@@ -39,12 +39,11 @@ phases:
       - echo $AUTH_CLIENT_ID
       - echo $AUTH_USER_POOL_ID
       - npm run-script build
-      - ls -la .next
-      - ls -la .next/static
       - export S3_PATH=s3://$SERVICE_NAME-$ENV-$REGION-cloudfront/$ASSET_HASH/_next/static
       - echo $S3_PATH
       - aws s3 cp $CODEBUILD_SRC_DIR/www/.next/static $S3_PATH --recursive  --acl public-read
       - cp run.sh $CODEBUILD_SRC_DIR/www/.next/standalone
+      - ls -la $CODEBUILD_SRC_DIR/www/.next/standalone
       # - cd $CODEBUILD_SRC_DIR/www/.next/standalone
       # - zip -r function.zip ./
       # - aws lambda update-function-code --zip-file fileb://function.zip --function-name schematical-com-$ENV-www
