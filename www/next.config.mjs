@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 import withMDX from "@next/mdx";
-const nextConfig = withMDX({
+const nextConfig = {
     output: 'standalone',
 
     pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
@@ -31,8 +31,9 @@ const nextConfig = withMDX({
             }
         ]
     }
-});
+};
 if(process.env.PUBLIC_ASSET_URL){
     nextConfig.assetPrefix =`${process.env.PUBLIC_ASSET_URL}/${process.env.ASSET_HASH || ""}`;
 }
+console.log("NEXT_CONFIG", JSON.stringify(nextConfig, null, 3));
 export default nextConfig;
