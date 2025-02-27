@@ -6,8 +6,8 @@ phases:
       nodejs: latest
   pre_build:
     commands:
-      - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
-      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      # - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
+      # - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
 
       - cd $CODEBUILD_SRC_DIR/www
@@ -18,7 +18,7 @@ phases:
       - cd $CODEBUILD_SRC_DIR/www
       - ASSET_HASH=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32)
 
-      - export REACT_APP_GRAPHQL_URI=https://$ENV-v1-us-east-1-api.schematical.com/chaoscrawler
+
       # - export PUBLIC_URL=https://assets-$ENV.schematical.com/$ASSET_HASH
 
       - export REACT_APP_ENVIRONMENT $ENV
@@ -46,7 +46,7 @@ phases:
       - ls -la $CODEBUILD_SRC_DIR/www/.next/standalone
       - cd $CODEBUILD_SRC_DIR/www/.next/standalone
       - zip -r function.zip ./
-      - aws lambda update-function-code --zip-file fileb://function.zip --function-name schematical-com-$ENV-www
+      - aws lambda update-function-code --zip-file fileb://function.zip --function-name explodeme-com-$ENV-www
 
       # - cd $CODEBUILD_SRC_DIR/www/
       # - docker build -t $REPOSITORY_URI:$ENV .
