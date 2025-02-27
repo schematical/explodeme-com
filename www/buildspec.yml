@@ -44,14 +44,14 @@ phases:
       - aws s3 cp $CODEBUILD_SRC_DIR/www/.next/static $S3_PATH --recursive  --acl public-read
       - cp run.sh $CODEBUILD_SRC_DIR/www/.next/standalone
       - ls -la $CODEBUILD_SRC_DIR/www/.next/standalone
-      # - cd $CODEBUILD_SRC_DIR/www/.next/standalone
-      # - zip -r function.zip ./
-      # - aws lambda update-function-code --zip-file fileb://function.zip --function-name schematical-com-$ENV-www
+      - cd $CODEBUILD_SRC_DIR/www/.next/standalone
+      - zip -r function.zip ./
+      - aws lambda update-function-code --zip-file fileb://function.zip --function-name schematical-com-$ENV-www
 
-      - cd $CODEBUILD_SRC_DIR/www/
-      - docker build -t $REPOSITORY_URI:$ENV .
-      - docker tag $REPOSITORY_URI:$ENV $REPOSITORY_URI:$ENV
-      - docker push $REPOSITORY_URI:$ENV
+      # - cd $CODEBUILD_SRC_DIR/www/
+      # - docker build -t $REPOSITORY_URI:$ENV .
+      # - docker tag $REPOSITORY_URI:$ENV $REPOSITORY_URI:$ENV
+      # - docker push $REPOSITORY_URI:$ENV
 
   post_build:
     commands:
